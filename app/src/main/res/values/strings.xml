@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">IVPN</string>
     <string name="list_text">%1$s,&#160;%2$s</string>
+    <string name="no_connection">Seems you have no internet connction, please turn it on to continue.</string>
 </resources>

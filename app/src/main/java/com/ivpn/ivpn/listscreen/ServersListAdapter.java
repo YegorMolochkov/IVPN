@@ -1,4 +1,4 @@
-package com.ivpn.ivpn;
+package com.ivpn.ivpn.listscreen;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.ivpn.ivpn.R;
+import com.ivpn.ivpn.framework.Utils;
 import com.ivpn.ivpn.network.Server;
 
 import java.util.ArrayList;
@@ -17,15 +19,15 @@ import butterknife.ButterKnife;
 /**
  * Adapter for list of servers
  */
-public class ServersListAdapter extends RecyclerView.Adapter<ServerViewHolder> {
+class ServersListAdapter extends RecyclerView.Adapter<ServerViewHolder> {
 
     private Context mContext;
     private ArrayList<Server> mServers;
     private OnItemSelectedListener mListener;
 
-    public ServersListAdapter(Context context, OnItemSelectedListener listener) {
+    ServersListAdapter(Context context, OnItemSelectedListener listener) {
         mContext = context;
-        mServers = ApplicationSingleton.getInstance().getServers();
+        mServers = Utils.readServers(context);
         mListener = listener;
     }
 
@@ -49,13 +51,13 @@ public class ServersListAdapter extends RecyclerView.Adapter<ServerViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mServers.size();
+        return mServers == null ? 0 : mServers.size();
     }
 
     /**
      * interface to listen list callbacks
      */
-    public interface OnItemSelectedListener {
+    interface OnItemSelectedListener {
 
         /**
          * calls when list item selected

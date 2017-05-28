@@ -1,4 +1,4 @@
-package com.ivpn.ivpn.activities;
+package com.ivpn.ivpn.framework;
 
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,9 @@ import butterknife.Unbinder;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    Unbinder unbinder;
+    protected Unbinder unbinder;
     private ProgressDialog mDialog;
+    protected boolean isAlive;
 
     @Override
     protected void onDestroy() {
@@ -21,10 +22,22 @@ public class BaseActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isAlive = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isAlive = false;
+    }
+
     /**
      * shows loading dialog
      */
-    void showWaitDialog() {
+    protected void showWaitDialog() {
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("Loading...");
         mDialog.setCancelable(false);
@@ -34,7 +47,7 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * hides loading dialog
      */
-    void hideDialog() {
+    protected void hideDialog() {
         if (mDialog != null && mDialog.isShowing()) {
             mDialog.dismiss();
         }
