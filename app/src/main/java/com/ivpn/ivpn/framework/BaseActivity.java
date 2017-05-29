@@ -11,7 +11,7 @@ import butterknife.Unbinder;
 public class BaseActivity extends AppCompatActivity {
 
     protected Unbinder unbinder;
-    private ProgressDialog mDialog;
+
     protected boolean isAlive;
 
     @Override
@@ -32,24 +32,5 @@ public class BaseActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         isAlive = false;
-    }
-
-    /**
-     * shows loading dialog
-     */
-    protected void showWaitDialog() {
-        mDialog = new ProgressDialog(this);
-        mDialog.setMessage("Loading...");
-        mDialog.setCancelable(false);
-        mDialog.show();
-    }
-
-    /**
-     * hides loading dialog
-     */
-    protected void hideDialog() {
-        if (mDialog != null && mDialog.isShowing()) {
-            mDialog.dismiss();
-        }
     }
 }

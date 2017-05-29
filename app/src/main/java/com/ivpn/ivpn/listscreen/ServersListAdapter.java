@@ -25,9 +25,9 @@ class ServersListAdapter extends RecyclerView.Adapter<ServerViewHolder> {
     private ArrayList<Server> mServers;
     private OnItemSelectedListener mListener;
 
-    ServersListAdapter(Context context, OnItemSelectedListener listener) {
+    ServersListAdapter(Context context, ArrayList<Server> servers, OnItemSelectedListener listener) {
         mContext = context;
-        mServers = Utils.readServers(context);
+        mServers = servers;
         mListener = listener;
     }
 
@@ -53,6 +53,8 @@ class ServersListAdapter extends RecyclerView.Adapter<ServerViewHolder> {
     public int getItemCount() {
         return mServers == null ? 0 : mServers.size();
     }
+
+
 
     /**
      * interface to listen list callbacks

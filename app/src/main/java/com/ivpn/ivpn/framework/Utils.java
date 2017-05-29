@@ -15,6 +15,8 @@ import com.ivpn.ivpn.network.Server;
 import com.ivpn.ivpn.network.ServersService;
 import com.ivpn.ivpn.network.ServiceProvider;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +135,7 @@ public class Utils {
             public void onResponse(Call<ArrayList<Server>> call, Response<ArrayList<Server>> response) {
                 ArrayList<Server> servers = response.body();
                 Utils.storeServers(context, servers);
+                EventBus.getDefault().post(new UpdatesLoadedEvent(servers));
                 if (callback != null) {
                     callback.onResponse(call, response);
                 }
